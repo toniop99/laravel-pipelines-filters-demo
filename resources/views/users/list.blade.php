@@ -37,9 +37,12 @@
         @else
             <p>No se ha encontrado ningún usuario con esos filtros</p>
         @endif
-        <div class="links mt-4">
-            {{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
-        </div>
+
+        @if(method_exists($users, 'links'))
+            <div class="links mt-4">
+                {{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
+            </div>
+        @endif
     </div>
 </div>
 </body>

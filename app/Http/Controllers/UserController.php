@@ -2,31 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\QueryFilters\Active;
-use App\QueryFilters\Email;
-use App\QueryFilters\Id;
-use App\QueryFilters\Name;
-use App\QueryFilters\Sort;
-use App\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Pipeline\Pipeline;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $query = User::query();
-        $users = app(Pipeline::class)
-            ->send($query)
-            ->through([
-                Active::class,
-                Name::class,
-                Id::class,
-                Email::class,
-                Sort::class,
-            ])
-            ->thenReturn()
-            ->paginate(20);
+        $service = new UserService();
+        $users = $service->all(true);
 
 //        if ($request->has('active')) {
 //            $query->where('active', $request->input('active'));
