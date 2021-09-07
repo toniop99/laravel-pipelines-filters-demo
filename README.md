@@ -1,4 +1,4 @@
-#Filter with Pipelines - DEMO
+# Filter with Pipelines - DEMO
 ## Setup
 - composer install
 - npm install
