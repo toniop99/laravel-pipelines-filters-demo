@@ -16,7 +16,7 @@
 <body>
 <div class="d-flex justify-content-center m-4">
     <div class="content">
-        @if(!$users->isEmpty())
+        @if(isset($users) && !$users->isEmpty())
             <table>
                 <tr>
                     <th scope="col">Id</th>
@@ -34,11 +34,14 @@
 
                 @endforeach
             </table>
+        @elseif(isset($error) && $error === true)
+            <h1 class="text-danger">Hubo un error al recuperar los usuarios</h1>
+            <p class="error-message">{{$message}}</p>
         @else
             <p>No se ha encontrado ningún usuario con esos filtros</p>
         @endif
 
-        @if(method_exists($users, 'links'))
+        @if(isset($users) && method_exists($users, 'links'))
             <div class="links mt-4">
                 {{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
             </div>
