@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -20,7 +19,8 @@ class UserService
 
 
     /**
-     * @return Model[]|Collection
+     * @param bool $pagination
+     * @return LengthAwarePaginator|Builder[]|Collection
      */
     public function allPipelines(bool $pagination = true)
     {
