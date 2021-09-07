@@ -15,7 +15,7 @@ final class Filter
      * @param bool $pagination
      * @return LengthAwarePaginator|Builder[]|Collection
      */
-    public static function applyFilters(Builder $builder, array $filters, bool $pagination = true) {
+    public static function applyFilters(Builder $query, array $filters, bool $pagination = true) {
         $result = app(Pipeline::class)
             ->send($builder)
             ->through($filters)
