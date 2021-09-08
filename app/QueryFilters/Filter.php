@@ -10,14 +10,14 @@ use Illuminate\Support\Collection;
 final class Filter
 {
     /**
-     * @param Builder $builder
+     * @param Builder $query
      * @param array $filters
      * @param bool $pagination
      * @return LengthAwarePaginator|Builder[]|Collection
      */
     public static function applyFilters(Builder $query, array $filters, bool $pagination = true) {
         $result = app(Pipeline::class)
-            ->send($builder)
+            ->send($query)
             ->through($filters)
             ->thenReturn();
 

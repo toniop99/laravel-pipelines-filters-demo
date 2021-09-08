@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\UserService;
+use App\User;
+use App\Video;
 use Exception;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -30,8 +33,7 @@ class UserController extends Controller
             $users = $this->userService->allPipelines(true);
             return view('users.list', compact('users'));
         } catch (Exception $e) {
-            return view('users.list', ['error' => true, 'message' => $e->getMessage()]);
+            return view('users.list', ['error' => true, 'message' => $e->getMessage(), 'trace' => $e->getFile() ]);
         }
-
     }
 }

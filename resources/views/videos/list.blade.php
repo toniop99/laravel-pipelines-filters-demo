@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pipelines Demo - users</title>
+    <title>Pipelines Demo - Videos</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -16,35 +16,36 @@
 <body>
 <div class="d-flex justify-content-center m-4">
     <div class="content">
-        @if(isset($users) && !$users->isEmpty())
+        @if(isset($videos) && !$videos->isEmpty())
             <table>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Video de</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Activo</th>
-                    <th scope="col">email</th>
+                    <th scope="col">Duración</th>
+
+
                 </tr>
-                @foreach($users as $user)
+                @foreach($videos as $video)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td class="{{$user->active ? 'text-success' : 'text-danger'}}">{{ $user->active ? 'Activo' : 'Inactivo' }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{ $video->id }}</td>
+                        <td>{{ $video->user->name }}</td>
+                        <td>{{ $video->translations->first()->name }}</td>
+                        <td>{{ $video->duration }}</td>
                     </tr>
 
                 @endforeach
             </table>
         @elseif(isset($error) && $error === true)
-            <h1 class="text-danger">Hubo un error al recuperar los usuarios</h1>
+            <h1 class="text-danger">Hubo un error al recuperar los videos</h1>
             <p class="error-message">{{$message}}</p>
-            <p>{{ $trace }}</p>
         @else
-            <p>No se ha encontrado ningún usuario con esos filtros</p>
+            <p>No se ha encontrado ningún video con esos filtros</p>
         @endif
 
-        @if(isset($users) && method_exists($users, 'links'))
+        @if(isset($videos) && method_exists($videos, 'links'))
             <div class="links mt-4">
-                {{ $users->appends(request()->input())->links("pagination::bootstrap-4") }}
+                {{ $videos->appends(request()->input())->links("pagination::bootstrap-4") }}
             </div>
         @endif
     </div>

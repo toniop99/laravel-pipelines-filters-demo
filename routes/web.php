@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/users', 'UserController');
 
+Route::get('/videos', 'VideoController@index');
+
 Route::get('/', function () {
     return view('welcome');
 });
